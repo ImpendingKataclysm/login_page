@@ -1,10 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.generic import TemplateView
 
 
-def login(request):
-    return render(request, 'registration/login.html')
+class HomePage(TemplateView):
+    template_name = 'home.html'
 
-
-def index(request):
-    return HttpResponse("hi")

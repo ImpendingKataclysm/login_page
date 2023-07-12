@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    <h2>Sign Up</h2>
+    <form method="post" id="signup_form">
+        {% csrf_token %}
+        {{ form.as_p }}
+{#        <input type="hidden" id="generate_password" name="generate_password" value="False">#}
+        <button type="button" id="password_btn">Generate Secure Password</button>
+        <button type="submit">Sign Up</button>
+    </form>
+    <script>
+        let pass_btn = document.getElementById("password_btn")
+        pass_btn.addEventListener("click", generatePassword)
+
+        function generatePassword() {
+            let password1Field = document.getElementById('id_password1');
+            let password2Field = document.getElementById('id_password2');
+
+            password1Field.value = ''
+            password2Field.value = ''
+
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', '/signup/', true);
+
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    let response = JSON.parse(xhr.responseText)
+                    let generatedPassword = response.password;
+                    password1Field.value = generatedPassword;
+                    password2Field.value = generatedPassword;
+                }
+            };
+
+            xhr.send()
+        }
+    </script>
+{% endblock %}

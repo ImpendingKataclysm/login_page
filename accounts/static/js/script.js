@@ -1,9 +1,10 @@
-let pass_btn = document.getElementById("password_btn")
+// Generate Secure Password
+const pass_btn = document.getElementById("password_btn")
 pass_btn.addEventListener("click", generatePassword)
 
 function generatePassword() {
-    let password1Field = document.getElementById('id_password1');
-    let password2Field = document.getElementById('id_password2');
+    const password1Field = document.getElementById('id_password1');
+    const password2Field = document.getElementById('id_password2');
 
     password1Field.value = ''
     password2Field.value = ''
@@ -23,4 +24,19 @@ function generatePassword() {
     };
 
     xhr.send()
+}
+
+// Toggle Password Visibility
+const toggleBtn = document.getElementById("toggle_password")
+let passwordFields = document.querySelectorAll('input[type="password"]');
+toggleBtn.addEventListener("click", togglePasswordVisibility)
+
+function togglePasswordVisibility() {
+    passwordFields.forEach(field => {
+       if (field.type === 'password') {
+           field.type = 'text';
+       } else {
+           field.type = 'password';
+       }
+    });
 }

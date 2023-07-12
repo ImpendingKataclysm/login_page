@@ -8,6 +8,7 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button type="button" id="password_btn">Generate Secure Password</button>
+        <button type="button" id="toggle_password">Show</button>
         <button type="submit">Sign Up</button>
     </form>
     <script src="{% static 'js/script.js' %}"></script>

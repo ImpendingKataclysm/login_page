@@ -4,12 +4,26 @@ pass_btn.addEventListener("click", generatePassword)
 /** Generates a secure password when the user requests one through the form,
  * and populates the password fields with the new password. */
 function generatePassword() {
-    const password1Field = document.getElementById('id_password1');
-    const password2Field = document.getElementById('id_password2');
+    let password1Field = document.getElementById('id_password1');
+    let password2Field = document.getElementById('id_password2');
+
+    if (password1Field === null && password2Field === null) {
+        password1Field = document.getElementById('id_new_password1');
+        password2Field = document.getElementById('id_new_password2');
+    }
 
     password1Field.value = ''
     password2Field.value = ''
 
+    getSecurePassword(password1Field, password2Field)
+}
+
+/**
+ * Sends GET request to the Django backend for the generated password. If the
+ * request is successful, the specified form fields are populated with the
+ * retrieved password.
+ * */
+function getSecurePassword(field1, field2) {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', '/signup/', true);
 
@@ -19,8 +33,8 @@ function generatePassword() {
         if (xhr.status === 200) {
             let response = JSON.parse(xhr.responseText)
             let generatedPassword = response.password;
-            password1Field.value = generatedPassword;
-            password2Field.value = generatedPassword;
+            field1.value = generatedPassword;
+            field2.value = generatedPassword;
         }
     };
 

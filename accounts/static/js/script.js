@@ -1,7 +1,8 @@
-// Generate Secure Password
 const pass_btn = document.getElementById("password_btn")
 pass_btn.addEventListener("click", generatePassword)
 
+/** Generates a secure password when the user requests one through the form,
+ * and populates the password fields with the new password. */
 function generatePassword() {
     const password1Field = document.getElementById('id_password1');
     const password2Field = document.getElementById('id_password2');
@@ -26,11 +27,11 @@ function generatePassword() {
     xhr.send()
 }
 
-// Toggle Password Visibility
 const toggleBtn = document.getElementById("toggle_password")
 let passwordFields = document.querySelectorAll('input[type="password"]');
 toggleBtn.addEventListener("click", togglePasswordVisibility)
 
+/** Change the current visibility of the text in the password fields */
 function togglePasswordVisibility() {
     passwordFields.forEach(field => {
        if (field.type === 'password') {

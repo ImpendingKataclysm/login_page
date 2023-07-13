@@ -50,8 +50,10 @@ function togglePasswordVisibility() {
     passwordFields.forEach(field => {
        if (field.type === 'password') {
            field.type = 'text';
+           toggleBtn.innerHTML = "Hide";
        } else {
            field.type = 'password';
+           toggleBtn.innerHTML = "Show";
        }
     });
 }
